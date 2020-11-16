@@ -107,13 +107,11 @@ func Verify(jwtToken string, publicKeyBytes []byte) {
 	payloadSegment := tokenParts[1]
 	cryptoSegment := tokenParts[2]
 
-	signature, err := Base64Decode(cryptoSegment)
-
 	message := headerSegment + "." + payloadSegment
-
 	messageBytes := []byte(message)
 	hashed := sha256.Sum256(messageBytes)
 
+	signature, err := Base64Decode(cryptoSegment)
 
 	if err != nil {
 		log.Fatal("Error decoding cryptoSegment: %s", err)
