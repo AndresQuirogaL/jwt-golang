@@ -13,7 +13,7 @@ func main() {
     rawHeader := "{\"alg\":\"RS256\",\"typ\":\"JWT\"}"
     rawPayload := "{\"sub\":\"1234567890\"}"
 	privateKey, err := ioutil.ReadFile("jwt_keys/jwt-key.pem")
-	pass := "1234567890"
+	pass := "te3455gggd1235"
 
 	if err != nil {
 		log.Fatal(err)
