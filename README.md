@@ -23,3 +23,9 @@ $ docker build . -t jwt-golang:0.1.0
 ~~~
 $ docker run --rm jwt-golang:0.1.0
 ~~~
+
+### Functions
+
+Encode JWT function: https://github.com/aaquirogal/jwt-golang/blob/main/jwt/jwt.go#L43
+
+Verify JWT Token: https://github.com/aaquirogal/jwt-golang/blob/main/jwt/jwt.go#L89
