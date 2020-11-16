@@ -28,4 +28,4 @@ $ docker run --rm jwt-golang:0.1.0
 
 Encode JWT function: https://github.com/aaquirogal/jwt-golang/blob/main/jwt/jwt.go#L43
 
-Verify JWT Token: https://github.com/aaquirogal/jwt-golang/blob/main/jwt/jwt.go#L89
+Verify JWT: https://github.com/aaquirogal/jwt-golang/blob/main/jwt/jwt.go#L89
