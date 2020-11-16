@@ -50,19 +50,19 @@ func Encode(header string, payload string, privateKeyBytes []byte, pass string) 
 	messageBytes := []byte(message)
 	hashed := sha256.Sum256(messageBytes)
 
-    KEYBLOCK, _ := pem.Decode(privateKeyBytes)
+    block, _ := pem.Decode(privateKeyBytes)
 
-	if "RSA PRIVATE KEY" != KEYBLOCK.Type {
-		log.Fatal("CA Private Key Type %s", KEYBLOCK.Type)
+	if "RSA PRIVATE KEY" != block.Type {
+		log.Fatal("CA Private Key Type %s", block.Type)
 	}
 
 	var keyBytes []byte
 
-	if x509.IsEncryptedPEMBlock(KEYBLOCK) {
-		keyBytes, _ = x509.DecryptPEMBlock(KEYBLOCK, []byte(pass))
+	if x509.IsEncryptedPEMBlock(block) {
+		keyBytes, _ = x509.DecryptPEMBlock(block, []byte(pass))
 	} else {
 		fmt.Println(" *** No password")
-		keyBytes = KEYBLOCK.Bytes
+		keyBytes = block.Bytes
 	}
 
 	privKey, err := x509.ParsePKCS1PrivateKey(keyBytes)
@@ -87,14 +87,14 @@ func Encode(header string, payload string, privateKeyBytes []byte, pass string) 
 
 
 func Verify(jwtToken string, publicKeyBytes []byte) {
-	KEYBLOCK, _ := pem.Decode(publicKeyBytes)
+	block, _ := pem.Decode(publicKeyBytes)
 
-	if "PUBLIC KEY" != KEYBLOCK.Type {
-		log.Fatal("CA Public Key Type %s", KEYBLOCK.Type)
+	if "PUBLIC KEY" != block.Type {
+		log.Fatal("CA Public Key Type %s", block.Type)
 		return
 	}
 
-	pubKey, err := x509.ParsePKIXPublicKey(KEYBLOCK.Bytes)
+	pubKey, err := x509.ParsePKIXPublicKey(block.Bytes)
 
 	if err != nil {
 		log.Fatal("Cannot parse Public Key %s", err)
